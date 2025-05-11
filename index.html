@@ -41,24 +41,48 @@
   <script>
     const ipaSymbols = [
       { symbol: "ɪ", audio: "audio/i_short.mp3" },
-      { symbol: "b", audio: "https://upload.wikimedia.org/wikipedia/commons/d/d3/Voiced_bilabial_plosive.ogg" },
-      { symbol: "t", audio: "https://upload.wikimedia.org/wikipedia/commons/8/8c/Voiceless_alveolar_plosive.ogg" },
-      { symbol: "d", audio: "https://upload.wikimedia.org/wikipedia/commons/6/64/Voiced_alveolar_plosive.ogg" },
-      { symbol: "k", audio: "https://upload.wikimedia.org/wikipedia/commons/6/6f/Voiceless_velar_plosive.ogg" },
-      { symbol: "g", audio: "https://upload.wikimedia.org/wikipedia/commons/0/0f/Voiced_velar_plosive.ogg" },
-      { symbol: "ʃ", audio: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Voiceless_palato-alveolar_fricative.ogg" },
-      { symbol: "ʒ", audio: "https://upload.wikimedia.org/wikipedia/commons/4/4f/Voiced_palato-alveolar_fricative.ogg" },
-      { symbol: "θ", audio: "https://upload.wikimedia.org/wikipedia/commons/6/6a/Voiceless_dental_fricative.ogg" },
-      { symbol: "ð", audio: "https://upload.wikimedia.org/wikipedia/commons/0/0c/Voiced_dental_fricative.ogg" },
-      { symbol: "m", audio: "https://upload.wikimedia.org/wikipedia/commons/f/f0/Voiced_bilabial_nasal.ogg" },
-      { symbol: "n", audio: "https://upload.wikimedia.org/wikipedia/commons/b/bf/Voiced_alveolar_nasal.ogg" },
-      { symbol: "ŋ", audio: "https://upload.wikimedia.org/wikipedia/commons/7/7e/Voiced_velar_nasal.ogg" },
-      { symbol: "s", audio: "https://upload.wikimedia.org/wikipedia/commons/5/55/Voiceless_alveolar_fricative.ogg" },
-      { symbol: "z", audio: "https://upload.wikimedia.org/wikipedia/commons/f/fd/Voiced_alveolar_fricative.ogg" },
-      { symbol: "l", audio: "https://upload.wikimedia.org/wikipedia/commons/5/5c/Alveolar_lateral_approximant.ogg" },
-      { symbol: "r", audio: "https://upload.wikimedia.org/wikipedia/commons/1/1c/Alveolar_tap.ogg" },
-      { symbol: "j", audio: "https://upload.wikimedia.org/wikipedia/commons/2/21/Palatal_approximant.ogg" },
-      { symbol: "w", audio: "https://upload.wikimedia.org/wikipedia/commons/0/02/Voiced_labio-velar_approximant.ogg" }
+      { symbol: "e", audio: "audio/i_long.mp3" },
+      { symbol: "ə", audio: "audio/o_small.mp3" },
+      { symbol: "ɜ:", audio: "audio/o_long.mp3" },
+      { symbol: "ʊ", audio: "audio/u_short.mp3" },
+      { symbol: "u:", audio: "audio/u_long.mp3" },
+      { symbol: "ɒ", audio: "audio/o_o_short.mp3" },
+      { symbol: "ɔ:", audio: "audio/o_o_long.mp3" },
+      { symbol: "ʌ", audio: "audio/a_short.mp3" },
+      { symbol: "ɑ:", audio: "audio/a_long.mp3" },
+      { symbol: "æ", audio: "audio/ae.mp3" },
+      { symbol: "ɪə", audio: "audio/ie.mp3" },
+      { symbol: "eə", audio: "audio/ea.mp3" },
+      { symbol: "ei", audio: "audio/ei.mp3" },
+      { symbol: "ɔɪ", audio: "audio/oi.mp3" },
+      { symbol: "aɪ", audio: "audio/ai.mp3" },
+      { symbol: "əʊ", audio: "audio/ou.mp3" },
+      { symbol: "aʊ", audio: "audio/au.mp3" },
+      { symbol: "ʊə", audio: "audio/uo.mp3" }
+      { symbol: "p", audio: "audio/p.mp3" }
+      { symbol: "b", audio: "audio/b.mp3" }
+      { symbol: "t", audio: "audio/t.mp3" }
+      { symbol: "d", audio: "audio/d.mp3" }
+      { symbol: "t∫", audio: "audio/ts.mp3" }
+      { symbol: "dʒ", audio: "audio/d3.mp3" }
+      { symbol: "k", audio: "audio/k.mp3" }
+      { symbol: "g", audio: "audio/g.mp3" }
+      { symbol: "f", audio: "audio/f.mp3" }
+      { symbol: "v", audio: "audio/v.mp3" }
+      { symbol: "ð", audio: "audio/os.mp3" }
+      { symbol: "θ", audio: "audio/theta.mp3" }
+      { symbol: "s", audio: "audio/s.mp3" }
+      { symbol: "z", audio: "audio/z.mp3" }
+      { symbol: "∫", audio: "audio/s_long.mp3" }
+      { symbol: "ʒ", audio: "audio/3.mp3" }
+      { symbol: "m", audio: "audio/m.mp3" }
+      { symbol: "n", audio: "audio/n.mp3" }
+      { symbol: "ŋ", audio: "audio/n_long.mp3" }
+      { symbol: "h", audio: "audio/h.mp3" }
+      { symbol: "l", audio: "audio/l.mp3" }
+      { symbol: "r", audio: "audio/r.mp3" }
+      { symbol: "w", audio: "audio/w.mp3" }
+      { symbol: "j", audio: "audio/j.mp3" }
     ];
 
     const grid = document.getElementById('ipaGrid');
