@@ -1,141 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Bảng Phiên Âm IPA Tương Tác</title>
+  <meta charset="UTF-8" />
+  <title>Bảng Phiên Âm IPA</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       background: #f2f2f2;
       padding: 30px;
-      color: #333;
     }
     h1 {
       text-align: center;
       margin-bottom: 30px;
     }
-    .section {
-      margin-bottom: 40px;
-    }
-    .section h2 {
-      margin-bottom: 10px;
-      border-bottom: 2px solid #ccc;
-      padding-bottom: 5px;
-    }
-    .grid {
+    .chart {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+      grid-template-columns: repeat(8, 100px);
       gap: 10px;
+      justify-content: center;
+      margin-bottom: 50px;
     }
     .cell {
       background: #fff;
       padding: 10px;
       border-radius: 8px;
       text-align: center;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
       cursor: pointer;
-      transition: 0.2s;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
     }
-    .cell:hover {
-      background: #e0f0ff;
-    }
-    .ipa {
-      font-size: 24px;
+    .symbol {
+      font-size: 22px;
       font-weight: bold;
     }
-    .example {
+    .word {
       font-size: 12px;
-      color: #666;
+      margin-top: 4px;
+      color: #333;
+    }
+    .cell:hover {
+      background: #e0f7ff;
     }
 
+    /* Color scheme */
     .short { background: #ffe8e0; }
     .long { background: #fff0c9; }
     .diph { background: #fce3d6; }
     .voiced { background: #ddf5dd; }
     .unvoiced { background: #dce6f9; }
 
+    .label {
+      grid-column: span 8;
+      text-align: left;
+      font-weight: bold;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
   <h1>Bảng Phiên Âm IPA Tương Tác</h1>
 
-  <div class="section">
-    <h2>Nguyên âm (Vowels)</h2>
-    <div class="grid" id="vowelsGrid"></div>
-  </div>
+  <div class="label">Vowels</div>
+  <div class="chart" id="vowelChart"></div>
 
-  <div class="section">
-    <h2>Phụ âm (Consonants)</h2>
-    <div class="grid" id="consonantsGrid"></div>
-  </div>
+  <div class="label">Consonants</div>
+  <div class="chart" id="consonantChart"></div>
 
   <script>
     const vowels = [
-      { symbol: "i:", word: "sheep", audio: "i_long.mp3", class: "long" },
-      { symbol: "ɪ", word: "ship", audio: "i_short.mp3", class: "short" },
-      { symbol: "ʊ", word: "put", audio: "u_short.mp3", class: "short" },
-      { symbol: "u:", word: "moon", audio: "u_long.mp3", class: "long" },
-      { symbol: "e", word: "bed", audio: "e.mp3", class: "short" },
-      { symbol: "ə", word: "about", audio: "o_small.mp3", class: "short" },
-      { symbol: "ɜ:", word: "bird", audio: "o_long.mp3", class: "long" },
-      { symbol: "ɔ:", word: "walk", audio: "o_o_long.mp3", class: "long" },
-      { symbol: "æ", word: "cat", audio: "ae.mp3", class: "short" },
-      { symbol: "ʌ", word: "cup", audio: "a_short.mp3", class: "short" },
-      { symbol: "ɑ:", word: "car", audio: "a_long.mp3", class: "long" },
-      { symbol: "ɒ", word: "not", audio: "o_o_short.mp3", class: "short" },
-      { symbol: "eɪ", word: "say", audio: "ei.mp3", class: "diph" },
-      { symbol: "aɪ", word: "by", audio: "ai.mp3", class: "diph" },
-      { symbol: "ɔɪ", word: "boy", audio: "oi.mp3", class: "diph" },
-      { symbol: "aʊ", word: "now", audio: "au.mp3", class: "diph" },
-      { symbol: "əʊ", word: "go", audio: "ou.mp3", class: "diph" },
-      { symbol: "ɪə", word: "ear", audio: "ie.mp3", class: "diph" },
-      { symbol: "eə", word: "hair", audio: "ea.mp3", class: "diph" },
-      { symbol: "ʊə", word: "tourist", audio: "uo.mp3", class: "diph" }
+      { symbol: "i:", word: "sheep", audio: "audio/i_long.mp3", class: "long" },
+      { symbol: "ɪ", word: "ship", audio: "audio/i_short.mp3", class: "short" },
+      { symbol: "ʊ", word: "put", audio: "audio/u_short.mp3", class: "short" },
+      { symbol: "u:", word: "moon", audio: "audio/u_long.mp3", class: "long" },
+      { symbol: "ɜ:", word: "bird", audio: "audio/o_long.mp3", class: "long" },
+      { symbol: "eɪ", word: "train", audio: "audio/ei.mp3", class: "diph" },
+      { symbol: "əʊ", word: "go", audio: "audio/ou.mp3", class: "diph" },
+      { symbol: "ə", word: "about", audio: "audio/o_small.mp3", class: "short" },
+      { symbol: "e", word: "bed", audio: "audio/e.mp3", class: "short" },
+      { symbol: "ɔ:", word: "walk", audio: "audio/o_o_long.mp3", class: "long" },
+      { symbol: "ʊə", word: "tourist", audio: "audio/uo.mp3", class: "diph" },
+      { symbol: "ɔɪ", word: "boy", audio: "audio/oi.mp3", class: "diph" },
+      { symbol: "ɪə", word: "ear", audio: "audio/ie.mp3", class: "diph" },
+      { symbol: "æ", word: "cat", audio: "audio/ae.mp3", class: "short" },
+      { symbol: "ʌ", word: "cup", audio: "audio/a_short.mp3", class: "short" },
+      { symbol: "ɑ:", word: "car", audio: "audio/a_long.mp3", class: "long" },
+      { symbol: "ɒ", word: "pot", audio: "audio/o_o_short.mp3", class: "short" },
+      { symbol: "eə", word: "hair", audio: "audio/ea.mp3", class: "diph" },
+      { symbol: "aɪ", word: "high", audio: "audio/ai.mp3", class: "diph" },
+      { symbol: "aʊ", word: "now", audio: "audio/au.mp3", class: "diph" }
     ];
 
     const consonants = [
-      { symbol: "p", word: "pen", audio: "p.mp3", class: "unvoiced" },
-      { symbol: "b", word: "ball", audio: "b.mp3", class: "voiced" },
-      { symbol: "t", word: "table", audio: "t.mp3", class: "unvoiced" },
-      { symbol: "d", word: "dog", audio: "d.mp3", class: "voiced" },
-      { symbol: "k", word: "car", audio: "k.mp3", class: "unvoiced" },
-      { symbol: "g", word: "go", audio: "g.mp3", class: "voiced" },
-      { symbol: "f", word: "fire", audio: "f.mp3", class: "unvoiced" },
-      { symbol: "v", word: "video", audio: "v.mp3", class: "voiced" },
-      { symbol: "θ", word: "think", audio: "theta.mp3", class: "unvoiced" },
-      { symbol: "ð", word: "this", audio: "os.mp3", class: "voiced" },
-      { symbol: "s", word: "see", audio: "s.mp3", class: "unvoiced" },
-      { symbol: "z", word: "zebra", audio: "z.mp3", class: "voiced" },
-      { symbol: "ʃ", word: "shop", audio: "s_long.mp3", class: "unvoiced" },
-      { symbol: "ʒ", word: "television", audio: "3.mp3", class: "voiced" },
-      { symbol: "tʃ", word: "chips", audio: "ts.mp3", class: "unvoiced" },
-      { symbol: "dʒ", word: "jam", audio: "d3.mp3", class: "voiced" },
-      { symbol: "m", word: "man", audio: "m.mp3", class: "voiced" },
-      { symbol: "n", word: "nose", audio: "n.mp3", class: "voiced" },
-      { symbol: "ŋ", word: "sing", audio: "n_long.mp3", class: "voiced" },
-      { symbol: "l", word: "light", audio: "l.mp3", class: "voiced" },
-      { symbol: "r", word: "red", audio: "r.mp3", class: "voiced" },
-      { symbol: "j", word: "yes", audio: "j.mp3", class: "voiced" },
-      { symbol: "w", word: "we", audio: "w.mp3", class: "voiced" },
-      { symbol: "h", word: "house", audio: "h.mp3", class: "unvoiced" }
+      { symbol: "p", word: "pen", audio: "audio/p.mp3", class: "unvoiced" },
+      { symbol: "b", word: "ball", audio: "audio/b.mp3", class: "voiced" },
+      { symbol: "t", word: "table", audio: "audio/t.mp3", class: "unvoiced" },
+      { symbol: "d", word: "dog", audio: "audio/d.mp3", class: "voiced" },
+      { symbol: "ʧ", word: "chips", audio: "audio/ts.mp3", class: "unvoiced" },
+      { symbol: "ʤ", word: "jam", audio: "audio/d3.mp3", class: "voiced" },
+      { symbol: "k", word: "car", audio: "audio/k.mp3", class: "unvoiced" },
+      { symbol: "g", word: "go", audio: "audio/g.mp3", class: "voiced" },
+      { symbol: "f", word: "fire", audio: "audio/f.mp3", class: "unvoiced" },
+      { symbol: "v", word: "video", audio: "audio/v.mp3", class: "voiced" },
+      { symbol: "θ", word: "thick", audio: "audio/theta.mp3", class: "unvoiced" },
+      { symbol: "ð", word: "this", audio: "audio/os.mp3", class: "voiced" },
+      { symbol: "s", word: "see", audio: "audio/s.mp3", class: "unvoiced" },
+      { symbol: "z", word: "zebra", audio: "audio/z.mp3", class: "voiced" },
+      { symbol: "ʃ", word: "shop", audio: "audio/s_long.mp3", class: "unvoiced" },
+      { symbol: "ʒ", word: "television", audio: "audio/3.mp3", class: "voiced" },
+      { symbol: "m", word: "man", audio: "audio/m.mp3", class: "voiced" },
+      { symbol: "n", word: "no", audio: "audio/n.mp3", class: "voiced" },
+      { symbol: "ŋ", word: "song", audio: "audio/n_long.mp3", class: "voiced" },
+      { symbol: "h", word: "house", audio: "audio/h.mp3", class: "unvoiced" },
+      { symbol: "l", word: "light", audio: "audio/l.mp3", class: "voiced" },
+      { symbol: "r", word: "red", audio: "audio/r.mp3", class: "voiced" },
+      { symbol: "w", word: "we", audio: "audio/w.mp3", class: "voiced" },
+      { symbol: "j", word: "yes", audio: "audio/j.mp3", class: "voiced" }
     ];
 
-    function createCell(item) {
-      const div = document.createElement('div');
-      div.className = `cell ${item.class}`;
-      div.innerHTML = `<div class="ipa">${item.symbol}</div><div class="example">${item.word}</div>`;
-      div.onclick = () => {
-        const audio = new Audio(`audio/${item.audio}`);
-        audio.play();
-      };
-      return div;
+    function renderChart(data, containerId) {
+      const container = document.getElementById(containerId);
+      data.forEach(item => {
+        const div = document.createElement("div");
+        div.className = `cell ${item.class}`;
+        div.innerHTML = `<div class="symbol">${item.symbol}</div><div class="word">${item.word}</div>`;
+        div.onclick = () => new Audio(item.audio).play();
+        container.appendChild(div);
+      });
     }
 
-    const vowelsGrid = document.getElementById("vowelsGrid");
-    vowels.forEach(item => vowelsGrid.appendChild(createCell(item)));
-
-    const consonantsGrid = document.getElementById("consonantsGrid");
-    consonants.forEach(item => consonantsGrid.appendChild(createCell(item)));
+    renderChart(vowels, "vowelChart");
+    renderChart(consonants, "consonantChart");
   </script>
 </body>
 </html>
